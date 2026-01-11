@@ -134,8 +134,8 @@ npm install
 ```bash
 npm run dev
 ```
-Open [http://localhost:3000](http://http://localhost:3000) in your browser.
-Open [http://192.168.43.121:3000](http://192.168.43.121:3000) in your browser.
+Open [localhost:3000](localhost:3000) in your browser.
+Open [192.168.43.121:3000](192.168.43.121:3000) in your browser.
 
 ---
 
