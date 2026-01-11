@@ -70,24 +70,44 @@ This will reveal the camera control button in the bottom right, allowing you to 
 ## 📂 Project Structure
 
 ```text
-.
-├── components/                 # UI Components
-│   ├── DirectorControls.tsx    # Hidden "Director Mode" for recording demos
-│   ├── Layout.tsx              # Main application shell (Sidebar + Header)
-│   ├── SimulationEngine.tsx    # Visualizer for the autonomous agent simulation
-│   └── SolidityViewer.tsx      # Component to display and copy smart contract code
+
+├── contracts/                  # 🏗️ NEW: Smart Contracts (Production-ready)
+│   ├── AgentWallet.sol         # AI agent treasury with spending limits
+│   ├── InvoiceRegistry.sol     # Service invoice tracking system  
+│   ├── MockERC20.sol           # ERC20 token for testing
+│   ├── scripts/
+│   │   └── deploy.js           # Hardhat deployment script
+│   ├── package.json            # Contract dependencies
+│   └── README.md               # Smart contract documentation
 │
-├── services/                   # Business Logic & Data Layers
-│   ├── mockWeb3.ts             # Initial mock data (Agents, Transactions)
-│   └── web3Service.ts          # Singleton service for Ethers.js & MNEE token interaction
+├── components/                 # 🎨 UI Components
+│   ├── DirectorControls.tsx    # 🎬 Hidden "Director Mode" (18.9KB)
+│   ├── Layout.tsx              # 🏗️ Main shell (5.7KB)
+│   ├── SimulationEngine.tsx    # 🤖 Agent simulation (7.9KB)
+│   └── SolidityViewer.tsx      # 📜 Contract display (5.4KB)
 │
-├── App.tsx                     # Main Application Controller & View Router
-├── index.html                  # HTML entry point with Tailwind CSS script
-├── index.tsx                   # React DOM entry point
-├── metadata.json               # Project configuration metadata
-├── README.md                   # Project documentation
-├── types.ts                    # Shared TypeScript interfaces (Agent, Transaction, Role)
-└── video.md                    # Voiceover script for the demo video
+├── services/                   # ⚙️ Business Logic
+│   ├── mockWeb3.ts             # 🎭 Mock data (1.8KB)
+│   └── web3Service.ts          # 🔗 Real MNEE integration (5.5KB)
+│
+├── dist/                       # 🚀 Production build (Vite output)
+├── node_modules/               # 📦 Dependencies (81.9KB package-lock)
+│
+├── .git/                       # 🔄 Version control (created!)
+├── App.tsx                     # 🎯 Main app (20KB)
+├── index.html                  # 📄 HTML entry (1.9KB)
+├── index.tsx                   # ⚛️ React entry (349B)
+├── metadata.json               # 🔧 Config (152B)
+├── README.md                   # 📚 Docs (7.2KB - updated!)
+├── types.ts                    # 📐 TypeScript interfaces (988B)
+├── video.md                    # 🎥 Demo script (3.3KB)
+├── package.json                # 📦 Project config (518B)
+├── package-lock.json           # 🔒 Lockfile (81.9KB)
+├── tsconfig.json               # ⚙️ TypeScript config (542B)
+├── vite.config.ts              # ⚡ Build config (580B)
+├── .env.local                  # 🔐 Environment vars (35B)
+├── LICENSE                     # ⚖️ MIT License (1.1KB - new!)
+└── .gitignore                  # 🚫 Ignored files (253B)
 ```
 
 ---
