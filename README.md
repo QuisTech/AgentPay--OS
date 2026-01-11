@@ -179,7 +179,7 @@ This project submits to the **AI & Agent Payments** track.
 
 ## 🎥 Video Demo
 
-[Watch the 5-minute demo video here](https://www.youtube.com/watch?v=77WGvUctgNM)
+[Watch the 5-minute demo video here](https://www.youtube.com/watch?v=QhIbUCC0b8k)
 *Covers: Wallet connection, Agent funding, Autonomous simulation, Smart contracts*
 
 ---
@@ -190,4 +190,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-*Built with ❤️ for the Web3 AI Hackathon.*
+*Built with ❤️ for the MNEE Hackathon: Programmable Money for Agents, Commerce, and Automated Finance*
