@@ -31,7 +31,7 @@ export const SimulationEngine: React.FC<SimulationEngineProps> = ({
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-full">
       {/* Control Panel */}
-      <div className="lg:col-span-1 space-y-6">
+      <div id="sim-controls" className="lg:col-span-1 space-y-6">
         <div className="bg-brand-primary p-6 rounded-xl border border-brand-border shadow-lg">
           <h3 className="text-lg font-semibold text-brand-accent mb-4">Autonomous Agent Loop</h3>
           <p className="text-sm text-slate-400 mb-6">
@@ -70,7 +70,7 @@ export const SimulationEngine: React.FC<SimulationEngineProps> = ({
               </div>
             </div>
             
-            <div className="p-3 bg-brand-surface rounded-lg border border-brand-border">
+            <div id="sim-recent-txs" className="p-3 bg-brand-surface rounded-lg border border-brand-border">
                <div className="text-xs font-semibold text-slate-500 uppercase mb-1">Recent On-Chain Txs</div>
                <div className="space-y-2">
                  {transactions.slice(0, 3).map(tx => (
@@ -86,7 +86,7 @@ export const SimulationEngine: React.FC<SimulationEngineProps> = ({
         </div>
 
         {/* Legend */}
-        <div className="bg-brand-primary p-6 rounded-xl border border-brand-border shadow-lg">
+        <div id="sim-legend" className="bg-brand-primary p-6 rounded-xl border border-brand-border shadow-lg">
           <h4 className="font-medium text-white mb-3">Simulation Legend</h4>
           <ul className="space-y-2 text-sm">
             <li className="flex items-center text-slate-400">
@@ -110,7 +110,7 @@ export const SimulationEngine: React.FC<SimulationEngineProps> = ({
       </div>
 
       {/* Terminal Output */}
-      <div className="lg:col-span-2 bg-[#02080c] rounded-xl border border-brand-border shadow-2xl overflow-hidden flex flex-col h-[600px]">
+      <div id="terminal-output" className="lg:col-span-2 bg-[#02080c] rounded-xl border border-brand-border shadow-2xl overflow-hidden flex flex-col h-[600px]">
         <div className="bg-[#051320] px-4 py-2 flex items-center justify-between border-b border-brand-border">
           <div className="flex items-center space-x-2">
             <Terminal className="w-4 h-4 text-brand-accent" />

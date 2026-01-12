@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Camera, Video, Square, Play, MousePointer2, X, Loader2 } from 'lucide-react';
+import { Camera, Video, Square, Play, MousePointer2, X, Loader2, Upload, Music, Trash2 } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import { Transaction, LogEntry, Agent } from '../types';
 
@@ -14,62 +14,71 @@ interface DirectorControlsProps {
 }
 
 // 5 Minute Script (300,000ms total roughly)
-// Format: action: 'cmd:target' or 'wait' or 'inject:activity'
 const DEMO_SCRIPT = [
   // --- INTRO (0:00 - 0:45) ---
-  { duration: 5000, text: "Welcome to the future of the Agentic Economy.", action: 'view:dashboard' },
-  { duration: 8000, text: "We are entering an era where AI agents perform complex tasks independently.", action: 'move:nav-dashboard' },
-  { duration: 7000, text: "But there is one major barrier: Financial Autonomy.", action: 'highlight:stats' },
-  { duration: 8000, text: "Today, an AI agent cannot open a bank account. They are financially paralyzed.", action: 'wait' },
-  { duration: 7000, text: "Introducing AgentPay OS. The first Treasury Management System for AI.", action: 'move:nav-dashboard' },
-  { duration: 10000, text: "It allows us to provision wallets, set spending budgets, and execute on-chain payments.", action: 'inject:activity' },
+  { duration: 4000, text: "Welcome to AgentPay OS. The financial operating system for the AI economy.", action: 'move:nav-dashboard' },
+  { duration: 4000, text: "As AI agents become autonomous, they face a critical barrier: They cannot bank.", action: 'move:stat-liquidity' }, 
+  { duration: 5000, text: "They can generate code and art, but they cannot pay for their own resources.", action: 'move:nav-agents' },
+  { duration: 5000, text: "We built the missing Treasury Layer. Secure, on-chain, and human-governed.", action: 'move:btn-connect-wallet' },
+  { duration: 6000, text: "Let's log in. I'm connecting the Master Treasury Key via MetaMask.", action: 'click:connect-wallet' },
+  { duration: 4000, text: "Authenticated. Access granted to the Organization's funds.", action: 'move:stat-wallet-balance' },
 
-  // --- TREASURY (0:45 - 1:45) ---
-  { duration: 5000, text: "Let's look at our fleet.", action: 'move:nav-agents' },
-  { duration: 2000, text: "Navigating to Agent Treasury...", action: 'click:nav-agents' },
-  { duration: 8000, text: "Here we have our Alpha Research Unit, Omni Data Source, and GPU Cluster.", action: 'highlight:agent-card' },
-  { duration: 8000, text: "Right now, the Research Unit is running low on funds.", action: 'wait' },
-  { duration: 5000, text: "Unlike a simulation, AgentPay OS connects to the real blockchain.", action: 'move:connect-wallet' },
-  { duration: 3000, text: "Connecting Treasury Master Key...", action: 'click:connect-wallet' },
-  { duration: 5000, text: "Now that I'm authenticated, I can fund this agent.", action: 'move:fund-btn' },
-  { duration: 4000, text: "Sending 500 MNEE tokens...", action: 'click:fund-btn' },
-  { duration: 10000, text: "This transaction is happening on-chain. MNEE provides stable value transfer.", action: 'wait' },
-  { duration: 5000, text: "And there it is. The agent is capitalized.", action: 'inject:activity' },
+  // --- TREASURY & FUNDING (0:45 - 1:45) ---
+  { duration: 3000, text: "First, let's inspect our fleet of autonomous agents.", action: 'move:nav-agents' },
+  { duration: 1000, text: "Navigating...", action: 'click:nav-agents' },
+  { duration: 5000, text: "We have three active agents: A Researcher, a Data Provider, and a GPU Cluster.", action: 'move:agent-card-ag_1' },
+  { duration: 5000, text: "The Alpha Research Unit is our primary spender. It buys data to train models.", action: 'move:agent-card-ag_2' },
+  { duration: 6000, text: "Notice the Data Source agent. It earns MNEE tokens by selling datasets.", action: 'move:agent-card-ag_3' },
+  { duration: 5000, text: "The GPU Cluster leases compute power. It's expensive.", action: 'move:btn-fund-agent-ag_1' },
+  { duration: 5000, text: "Our Researcher is running low. Let's provision funds manually first.", action: 'click:fund-btn' }, 
+  { duration: 6000, text: "I'm sending 500 MNEE. This is a real on-chain ERC-20 transfer.", action: 'wait' },
+  { duration: 4000, text: "Transaction confirmed. The balance updates instantly.", action: 'inject:activity' },
+  { duration: 5000, text: "Now that it's funded, we can enable autonomous mode.", action: 'move:nav-sim' },
 
-  // --- SIMULATION (1:45 - 3:30) ---
-  { duration: 5000, text: "Now, let's take the human out of the loop.", action: 'move:nav-sim' },
-  { duration: 2000, text: "Entering Simulation Engine...", action: 'click:nav-sim' },
-  { duration: 8000, text: "On the right, the terminal output. On the left, the logic.", action: 'move:start-agents' },
-  { duration: 3000, text: "Activating the swarm.", action: 'click:start-agents' },
-  { duration: 10000, text: "Watch closely. The Researcher realizes it's missing data.", action: 'inject:activity' },
-  { duration: 10000, text: "It queries the network and finds 'Omni Data Source'.", action: 'inject:activity' },
-  { duration: 10000, text: "It wants to buy. But first, it must check the Smart Contract Governance.", action: 'inject:activity' },
-  { duration: 10000, text: "The system validates: Is this within the daily limit?", action: 'inject:activity' },
-  { duration: 10000, text: "Passed. Payment executed. 200 MNEE moved instantly.", action: 'inject:activity' },
+  // --- SIMULATION (1:45 - 3:15) ---
+  { duration: 2000, text: "Switching to the Simulation Engine...", action: 'click:nav-sim' },
+  { duration: 5000, text: "This is the brain of the operation. Node.js agents interacting via smart contracts.", action: 'move:terminal-output' },
+  { duration: 5000, text: "On the left: Control & Status. On the right: The live terminal feed.", action: 'move:btn-start-simulation' },
+  { duration: 3000, text: "Initializing the swarm...", action: 'click:start-agents' },
+  { duration: 5000, text: "The system is live. Agents are now waking up and assessing their needs.", action: 'inject:activity' },
   
-  // Dashboard Peek during Simulation
-  { duration: 5000, text: "Let's check the economy impact.", action: 'move:nav-dash' },
-  { duration: 2000, text: "Back to Dashboard...", action: 'click:nav-dash' },
-  { duration: 15000, text: "See the Real-Time Chart? Balances are shifting live as agents trade.", action: 'inject:activity' },
-  { duration: 5000, text: "Returning to simulation...", action: 'move:nav-sim' },
-  { duration: 2000, text: "Viewing logs...", action: 'click:nav-sim' },
-  { duration: 15000, text: "The simulation continues autonomously. Compute is being leased now.", action: 'inject:activity' },
+  // Scenario 1
+  { duration: 6000, text: "[Event] The Researcher detects a gap in its financial training data.", action: 'move:terminal-output' }, 
+  { duration: 6000, text: "It pings the network. 'Omni Data Source' responds with availability.", action: 'inject:activity' },
+  { duration: 6000, text: "The Researcher requests an invoice. Cost: 200 MNEE.", action: 'move:sim-legend' }, 
+  { duration: 6000, text: "Crucial Step: The 'AgentWallet' contract intercepts the payment request.", action: 'inject:activity' }, 
+  { duration: 5000, text: "It validates: Is 'Dataset' an allowed category? Is it under the daily limit?", action: 'inject:activity' },
+  { duration: 5000, text: "Validation Passed. Payment executed on-chain.", action: 'move:sim-recent-txs' }, 
+  
+  // Scenario 2
+  { duration: 6000, text: "The agent now needs to process this data. It needs a GPU.", action: 'inject:activity' },
+  { duration: 6000, text: "It negotiates a lease with 'GPU Cluster Delta'.", action: 'move:terminal-output' },
+  { duration: 6000, text: "The price is higher here. 600 MNEE for 1 hour of H100 time.", action: 'inject:activity' },
+  { duration: 5000, text: "The budget governance contract approves the spend automatically.", action: 'move:sim-recent-txs' },
+  { duration: 4000, text: "No human intervention required. Just oversight.", action: 'wait' },
 
-  // --- SMART CONTRACTS (3:30 - 4:15) ---
-  { duration: 5000, text: "How do we trust this?", action: 'move:nav-contracts' },
-  { duration: 2000, text: "Opening Smart Contracts...", action: 'click:nav-contracts' },
-  { duration: 10000, text: "This is the AgentWallet.sol contract. Every agent uses this.", action: 'move:code-viewer' },
-  { duration: 10000, text: "It enforces daily limits that reset every 24 hours.", action: 'scroll:code-viewer' },
-  { duration: 10000, text: "It also checks category whitelists. Storage agents cannot buy Compute.", action: 'scroll:code-viewer' },
-  { duration: 8000, text: "This ensures that even if an agent hallucinates, funds are safe.", action: 'wait' },
+  // --- DASHBOARD (3:15 - 4:00) ---
+  { duration: 3000, text: "Let's see the financial impact in real-time.", action: 'move:nav-dash' },
+  { duration: 1000, text: "Back to Dashboard...", action: 'click:nav-dash' },
+  { duration: 5000, text: "Look at the 'Live Transactions' feed.", action: 'move:dashboard-tx-list' }, 
+  { duration: 5000, text: "We see the Data Purchase and the Compute Lease settling instantly.", action: 'move:dashboard-chart' }, 
+  { duration: 6000, text: "The chart reflects the wealth transfer. Researcher down, Providers up.", action: 'inject:activity' },
+  { duration: 5000, text: "This is a closed-loop AI economy running on MNEE.", action: 'wait' },
 
-  // --- CONCLUSION (4:15 - 5:00) ---
-  { duration: 5000, text: "The future isn't just about smarter models.", action: 'move:nav-dash' },
-  { duration: 2000, text: "Final check...", action: 'click:nav-dash' },
-  { duration: 10000, text: "It's about how those models interact with the economy.", action: 'inject:activity' },
-  { duration: 10000, text: "AgentPay OS provides the missing financial rails.", action: 'inject:activity' },
-  { duration: 8000, text: "Agents transact. Humans govern.", action: 'wait' },
-  { duration: 10000, text: "Built with React, Ethers.js, and MNEE. Thank you.", action: 'finish' },
+  // --- CONTRACTS (4:00 - 4:40) ---
+  { duration: 3000, text: "What protects the treasury from a rogue agent?", action: 'move:nav-contracts' },
+  { duration: 1000, text: "Let's inspect the code.", action: 'click:nav-contracts' },
+  { duration: 5000, text: "This is the Solidity contract deployed for every agent.", action: 'move:code-viewer-content' },
+  { duration: 5000, text: "The 'executePayment' function is the gatekeeper.", action: 'scroll:code-viewer' },
+  { duration: 6000, text: "It checks 'rule.spentToday + amount <= rule.dailyLimit'.", action: 'scroll:code-viewer' },
+  { duration: 6000, text: "If an agent gets hacked or hallucinates, the damage is capped mathematically.", action: 'inject:activity' }, 
+  { duration: 4000, text: "Trust is in the code, not the LLM.", action: 'wait' },
+
+  // --- OUTRO (4:40 - 5:00) ---
+  { duration: 3000, text: "AgentPay OS solves the last mile for AI autonomy.", action: 'move:nav-dashboard' },
+  { duration: 1000, text: "Final status check.", action: 'click:nav-dash' },
+  { duration: 5000, text: "Agents are working. Budgets are safe. The economy is growing.", action: 'inject:activity' },
+  { duration: 5000, text: "Ready for the MNEE Hackathon. Thank you.", action: 'finish' },
 ];
 
 export const DirectorControls: React.FC<DirectorControlsProps> = ({ 
@@ -87,11 +96,14 @@ export const DirectorControls: React.FC<DirectorControlsProps> = ({
   const [countdown, setCountdown] = useState<number | null>(null);
   const [currentSubtitle, setCurrentSubtitle] = useState("");
   const [mousePos, setMousePos] = useState({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
-  const isPlayingScriptRef = useRef(false);
+  const [voiceoverSrc, setVoiceoverSrc] = useState<string | null>(null);
   
+  const isPlayingScriptRef = useRef(false);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
   const panelRef = useRef<HTMLDivElement>(null);
+  const audioInputRef = useRef<HTMLInputElement>(null);
+  const audioPlayerRef = useRef<HTMLAudioElement | null>(null);
 
   // --- Virtual Mouse & Automation Engine ---
 
@@ -223,7 +235,13 @@ export const DirectorControls: React.FC<DirectorControlsProps> = ({
     // 3. Start Recording
     startRecordingStream(stream);
 
-    // 4. Run Script
+    // 4. Start Audio (if loaded)
+    if (voiceoverSrc) {
+       audioPlayerRef.current = new Audio(voiceoverSrc);
+       audioPlayerRef.current.play().catch(e => console.error("Audio play failed", e));
+    }
+
+    // 5. Run Script
     setIsPlayingScript(true);
     isPlayingScriptRef.current = true;
     
@@ -252,6 +270,10 @@ export const DirectorControls: React.FC<DirectorControlsProps> = ({
     setIsPlayingScript(false);
     isPlayingScriptRef.current = false;
     setCurrentSubtitle("");
+    if (audioPlayerRef.current) {
+      audioPlayerRef.current.pause();
+      audioPlayerRef.current = null;
+    }
     if (isRecording) stopRecording();
   };
 
@@ -322,6 +344,14 @@ export const DirectorControls: React.FC<DirectorControlsProps> = ({
     }
   };
 
+  const handleAudioUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setVoiceoverSrc(url);
+    }
+  };
+
   if (isMinimized) {
     return (
       <div className="fixed bottom-4 right-4 z-50">
@@ -342,6 +372,7 @@ export const DirectorControls: React.FC<DirectorControlsProps> = ({
         <div className="fixed inset-0 z-[10000] bg-black/80 flex flex-col items-center justify-center backdrop-blur-md">
            <div className="text-9xl font-bold text-white animate-ping">{countdown}</div>
            <p className="text-2xl text-brand-accent mt-8 font-bold">MOVE YOUR REAL MOUSE OFF SCREEN!</p>
+           {voiceoverSrc && <p className="text-white mt-4 text-sm animate-pulse">Voiceover Audio Active - Remember to Share Audio</p>}
         </div>
       )}
 
@@ -403,6 +434,39 @@ export const DirectorControls: React.FC<DirectorControlsProps> = ({
               <span>Stop Recording</span>
             </button>
           )}
+
+          {/* Audio Upload Controls */}
+          <div className="space-y-2">
+            <input 
+              type="file" 
+              accept="audio/*" 
+              ref={audioInputRef} 
+              className="hidden"
+              onChange={handleAudioUpload}
+            />
+            {!voiceoverSrc ? (
+              <button 
+                onClick={() => audioInputRef.current?.click()}
+                className="w-full flex items-center justify-center space-x-2 py-2 rounded-lg bg-brand-surface border border-brand-border text-slate-300 hover:bg-brand-border text-xs font-bold dashed border-2 border-dashed border-slate-700 hover:border-slate-500 hover:text-white transition-colors"
+              >
+                <Upload className="w-3 h-3" />
+                <span>Upload Voiceover (Optional)</span>
+              </button>
+            ) : (
+              <div className="flex items-center justify-between bg-brand-accent/10 border border-brand-accent/30 rounded-lg p-2">
+                <div className="flex items-center space-x-2 text-brand-accent">
+                  <Music className="w-4 h-4" />
+                  <span className="text-xs font-bold">Voiceover Ready</span>
+                </div>
+                <button 
+                  onClick={() => setVoiceoverSrc(null)}
+                  className="p-1 hover:bg-red-900/50 rounded text-slate-400 hover:text-red-400"
+                >
+                  <Trash2 className="w-3 h-3" />
+                </button>
+              </div>
+            )}
+          </div>
 
           <div className="grid grid-cols-2 gap-2">
             <button 

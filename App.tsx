@@ -212,7 +212,7 @@ function App() {
   const renderDashboard = () => (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-brand-primary p-6 rounded-xl border border-brand-border shadow-lg relative overflow-hidden">
+        <div id="stat-liquidity" className="bg-brand-primary p-6 rounded-xl border border-brand-border shadow-lg relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-brand-accent/5 rounded-full -mr-16 -mt-16 blur-2xl"></div>
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-slate-400 text-sm font-medium">System Liquidity</h3>
@@ -225,7 +225,7 @@ function App() {
             <ArrowUpRight className="w-3 h-3 mr-1" /> +12% vs last epoch
           </div>
         </div>
-        <div className="bg-brand-primary p-6 rounded-xl border border-brand-border shadow-lg">
+        <div id="stat-tx-vol" className="bg-brand-primary p-6 rounded-xl border border-brand-border shadow-lg">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-slate-400 text-sm font-medium">24h Transaction Vol</h3>
             <ArrowUpRight className="w-5 h-5 text-brand-secondary" />
@@ -234,7 +234,7 @@ function App() {
             {transactions.filter(t => t.timestamp > Date.now() - 86400000).reduce((acc, t) => acc + t.amount, 0).toLocaleString()} <span className="text-sm text-brand-secondary">MNEE</span>
           </p>
         </div>
-        <div className="bg-brand-primary p-6 rounded-xl border border-brand-border shadow-lg">
+        <div id="stat-wallet-balance" className="bg-brand-primary p-6 rounded-xl border border-brand-border shadow-lg">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-slate-400 text-sm font-medium">My Connected Wallet</h3>
             <Wallet className={`w-5 h-5 ${web3State.isConnected ? 'text-green-500' : 'text-slate-500'}`} />
@@ -249,7 +249,7 @@ function App() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-brand-primary p-6 rounded-xl border border-brand-border shadow-lg">
+        <div id="dashboard-chart" className="bg-brand-primary p-6 rounded-xl border border-brand-border shadow-lg">
           <h3 className="text-lg font-semibold text-white mb-6">Real-Time Agent Balances</h3>
           <div className="h-64">
              <ResponsiveContainer width="100%" height="100%">
@@ -268,7 +268,7 @@ function App() {
           </div>
         </div>
 
-        <div className="bg-brand-primary p-6 rounded-xl border border-brand-border shadow-lg">
+        <div id="dashboard-tx-list" className="bg-brand-primary p-6 rounded-xl border border-brand-border shadow-lg">
           <h3 className="text-lg font-semibold text-white mb-6">Live Transactions</h3>
           <div className="space-y-4">
             {transactions.slice(0, 5).map((tx, index) => (
@@ -316,7 +316,7 @@ function App() {
 
       <div className="grid gap-6">
         {agents.map((agent) => (
-          <div key={agent.id} className="bg-brand-primary rounded-xl border border-brand-border overflow-hidden shadow-lg relative">
+          <div id={`agent-card-${agent.id}`} key={agent.id} className="bg-brand-primary rounded-xl border border-brand-border overflow-hidden shadow-lg relative">
              {isFunding === agent.id && (
                <div className="absolute inset-0 bg-brand-primary/80 backdrop-blur-sm z-20 flex items-center justify-center flex-col">
                  <Loader2 className="w-8 h-8 text-brand-accent animate-spin mb-2" />
