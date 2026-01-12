@@ -121,7 +121,7 @@ This will reveal the camera control button in the bottom right, allowing you to 
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/agentpay-os.git
+git clone https://github.com/yourusername/agentpay--os.git
 cd agentpay-os
 ```
 
@@ -200,7 +200,7 @@ This project submits to the **AI & Agent Payments** track.
 
 ## 🎥 Video Demo
 
-[Watch the 5-minute demo video here](https://www.youtube.com/watch?v=QhIbUCC0b8k)
+[Watch the 5-minute demo video here](https://www.youtube.com/watch?v=vD9IJUHM9sM)
 *Covers: Wallet connection, Agent funding, Autonomous simulation, Smart contracts*
 
 ---
