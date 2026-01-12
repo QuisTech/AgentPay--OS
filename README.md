@@ -5,7 +5,7 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Status: Hackathon](https://img.shields.io/badge/Status-Hackathon_Submission-blue)
 ![Stack: React + Ethers](https://img.shields.io/badge/Tech-React_%7C_TypeScript_%7C_Ethers.js-00d8ff)
-<img width="1366" height="768" alt="Screenshot (164)" src="https://github.com/user-attachments/assets/9b50b7ae-db01-4965-94d7-3c21270aa19f" />
+<img width="1344" height="768" alt="Screenshot (166)" src="https://github.com/user-attachments/assets/33a89c82-262c-466d-a47f-64617dec7431" />
 ---
 
 ## 📖 Overview
